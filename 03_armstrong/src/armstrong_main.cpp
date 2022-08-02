@@ -1,11 +1,26 @@
 #include <iostream>
+#include <string>
 
 bool isArmstrongNumber(int number)
 {
+	int numberCompare = number;
+	int numberMemory = 0;
+	int moduloM = 10;
 	// TODO: implement some functionality to see if this number is an armstrong number
+	while (number != 0)
+	{
+		numberMemory += (number % moduloM) * (number % moduloM) * (number % moduloM);
+		number = number / 10;
 
-	return false;
+	}
+	if (numberCompare == numberMemory)
+		return true;
+	else
+		return false;
+	
 }
+
+
 
 void printIsArmstrong(int number)
 {
@@ -41,18 +56,41 @@ int main(int argc, char *argv[])
 	//
 
 	// Make sure there are some program arguments available.
+	
 	if (argc <= 1)
 	{
 		std::cout << "No program arguments found." << std::endl;
 		return 1;
 	}
 
-	int readNumber = 0;
+	
+
 	// Get the first argument
 	std::string argumentAsString = argv[1];
-	
-	// TODO: read number / cast to integer
+	const char* argumentAsCharArray = argumentAsString.c_str();
+	int numberIncrement = 0;
+	int arraySize = argumentAsString.size();
+	int i = 0;
+	while (arraySize != 0)
+	{
+		bool check = isdigit(argumentAsCharArray[i]);
+		if (!check)
+		{
+			numberIncrement++;
+		}
+		arraySize--;
 
-	printIsArmstrong(readNumber);
+	}
+	int number = atoi(argumentAsCharArray);
+	// TODO: read number / cast to integer
+	
+	if (numberIncrement != 0)
+	{
+		std::cout << "NAN" << std::endl;
+	}
+	else
+	{
+		printIsArmstrong(number);
+	}
 	return 0;
 }
